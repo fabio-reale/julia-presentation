@@ -5,9 +5,6 @@ function exp_alt(x, n::Int)
     if n == 1
         return x
     end
-    #=if n == 2
-        return x*x
-    end=#
     if n%2 == 1
         m = div(n,2)
         y = exp_alt(x, m)
@@ -19,5 +16,7 @@ function exp_alt(x, n::Int)
     end
 end
 
+#=
 rotation(θ) = [cos(θ) -sin(θ);
                sin(θ) cos(θ)]
+=#
