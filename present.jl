@@ -9,11 +9,11 @@ function exp_alt(x, n::Int)
         return x
     end
     if n%2 == 1
-        m = div(n,2)
+        m = n÷2
         y = exp_alt(x, m)
         return x*y*y
     else
-        m = div(n,2)
+        m = n÷2
         y = exp_alt(x, m)
         return y*y
     end

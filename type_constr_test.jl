@@ -15,7 +15,7 @@ import Base: *
 
 # Σ here isn't correct. data'*H*data is
 #sample_normal(data::Matrix) = Normal(esp(data), data'*data)
-esp(data::Matrix, n) = vec(sum(data,dims=1))./n
+esp(data::Matrix, n) = vec∘sum(data,dims=1)./n
 esp(data::Matrix) = esp(data, size(data)[1])
 
 function h_matrix(T, n)
