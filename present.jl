@@ -1,4 +1,7 @@
 function exp_alt(x, n::Int)
+    if n < 0
+        return error("exp_alt(x, n) where n ∈ ℕ")
+    end
     if n == 0
         return one(x)
     end
