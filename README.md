@@ -19,6 +19,12 @@ Apresentar o maior diferencial da linguagem através de um exemplo simples.
 
 Apresentar funcionalidade básica para importar dados. Em seguida, se aproveitar do multiple dispatch para processar dados de natureza distinta de maneira distinta com mínimo esforço.
 
+- Vetores e Matrizes:
+  - Indexação começa em 1
+
+- > using DelimitedFiles
+- > using DataFrames
+
 ### Aplicação
 
 Mostrar e discutir implementação de um método componentes_principais() utilizando apenas as ferramentas de álgebra linear que fazem parte do pacote básico.
