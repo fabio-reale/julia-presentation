@@ -16,15 +16,16 @@ function homocedastica(p::Int64, ρ)
 end
 homocedastica(μ, ρ) = homocedastica(length(μ), ρ)
 
-↦(v::Vector, x::Normal) where T = Normal(x.μ+v, x.Σ)
-↦(c::Matrix, x::Normal) where T = Normal(x.μ, c*x.Σ*c')
-↦(y::Normal, x::Normal) where T = y.Σ ↦ y.μ ↦ x
-padronizar(x::Normal) = real.(√x.Σ\one(x.Σ)) ↦ -x.μ ↦ x
-import Base: one
+import Base: *, one
+*(v::Vector, x::Normal) = Normal(x.μ+v, x.Σ)
+function *(c::Matrix, x::Normal)
+    sq = real.(√c)
+    Normal(x.μ, sq*x.Σ*sq')
+end
+*(y::Normal, x::Normal) = y.Σ * (y.μ * x)
+padronizar(x::Normal) = real.(√x.Σ\one(x.Σ)) * (-x.μ * x)
 one(x::Normal) = Normal(zero(x.μ), one(x.Σ))
-
-#This one is crashing
-#one(T::DataType, p::Int) = Normal( zero(Vector{T}(undef,p)), one(Matrix{T}(undef,p,p)) )
+one(::Type{Normal{T}}, p::Integer) where T = Normal( zero(Vector{T}(undef,p)), one(Matrix{T}(undef,p,p)) )
 
 # Σ here isn't correct. data'*H*data is
 #sample_normal(data::Matrix) = Normal(esp(data), data'*data)
