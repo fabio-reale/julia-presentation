@@ -1,4 +1,4 @@
-function exp_alt(x, n::Int)
+function exp_alt(x, n::Integer)
     if n < 0
         return error("exp_alt(x, n) where n ∈ ℕ")
     end
