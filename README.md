@@ -22,8 +22,9 @@ Apresentar funcionalidade básica para importar dados. Em seguida, se aproveitar
 - Vetores e Matrizes:
   - Indexação começa em 1
 
-- > using DelimitedFiles
-- > using DataFrames
+
+- `using DelimitedFiles`
+- `using DataFrames`
 
 ### Aplicação
 
@@ -31,4 +32,4 @@ Mostrar e discutir implementação de um método componentes_principais() utiliz
 
 ### Aplicação2
 
-Apresentar o principal pacote estatístico e comparar os resultados da implementação anterior com a função **PCA( )** desse pacote.
+Apresentar o principal pacote estatístico e comparar os resultados da implementação anterior com a função `PCA( )` desse pacote.
