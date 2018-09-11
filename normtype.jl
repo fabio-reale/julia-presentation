@@ -10,12 +10,6 @@ mutable struct Normal{T}
 end
 Normal(μ::Vector{T}, Σ::Matrix{T}) where T = Normal{T}(μ,Σ);
 
-function homocedastica(p::Int64, ρ)
-    aux = ones(Float64,p,p)
-    return (1-ρ)*one(aux)+ ρ*aux
-end
-homocedastica(μ, ρ) = homocedastica(length(μ), ρ)
-
 import Base: *, one
 *(v::Vector, x::Normal) = Normal(x.μ+v, x.Σ)
 function *(c::Matrix, x::Normal)
@@ -27,8 +21,12 @@ padronizar(x::Normal) = real.(√x.Σ\one(x.Σ)) * (-x.μ * x)
 one(x::Normal) = Normal(zero(x.μ), one(x.Σ))
 one(::Type{Normal{T}}, p::Integer) where T = Normal( zero(Vector{T}(undef,p)), one(Matrix{T}(undef,p,p)) )
 
-# Σ here isn't correct. data'*H*data is
-#sample_normal(data::Matrix) = Normal(esp(data), data'*data)
+function homocedastica(p::Int64, ρ)
+    aux = ones(Float64,p,p)
+    return (1-ρ)*one(aux)+ ρ*aux
+end
+homocedastica(μ, ρ) = homocedastica(length(μ), ρ)
+
 esp(data::Matrix, n) = vec(sum(data,dims=1)./n)
 esp(data::Matrix) = esp(data, size(data)[1])
 
