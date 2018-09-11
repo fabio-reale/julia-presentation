@@ -1,3 +1,4 @@
+# Reminder to force Σ to be Symmetric. Then upgrade to positive definite
 mutable struct Normal{T}
     μ::Vector{T}
     Σ::Matrix{T}
@@ -10,22 +11,19 @@ mutable struct Normal{T}
 end
 Normal(μ::Vector{T}, Σ::Matrix{T}) where T = Normal{T}(μ,Σ);
 
-import Base: *, one
-*(v::Vector, x::Normal) = Normal(x.μ+v, x.Σ)
-function *(c::Matrix, x::Normal)
-    sq = real.(√c)
-    Normal(x.μ, sq*x.Σ*sq')
-end
-*(y::Normal, x::Normal) = y.Σ * (y.μ * x)
-padronizar(x::Normal) = real.(√x.Σ\one(x.Σ)) * (-x.μ * x)
-one(x::Normal) = Normal(zero(x.μ), one(x.Σ))
-one(::Type{Normal{T}}, p::Integer) where T = Normal( zero(Vector{T}(undef,p)), one(Matrix{T}(undef,p,p)) )
+afim(v::Vector, x::Normal) = Normal(x.μ+v, x.Σ)
+afim(x::Normal, v::Vector) = afim(v::Vector, x::Normal)
+afim(m::Matrix, x::Normal) = Normal(m*x.μ, m*x.Σ*m')
+afim(x::Normal, m::Matrix) = afim(m::Matrix, x::Normal)
+afim(v::Vector, m::Matrix, x::Normal) = afim(m, afim(v,x))
+padrão(x::Normal) = Normal(zero(x.μ), one(x.Σ))
+padrão(::Type{Normal{T}}, p::Integer) where T = Normal( zero(Vector{T}(undef,p)), one(Matrix{T}(undef,p,p)) )
 
-function homocedastica(p::Int64, ρ)
-    aux = ones(Float64,p,p)
+function homocedastica(T::Type, p::Integer, ρ)
+    aux = ones(T,p,p)
     return (1-ρ)*one(aux)+ ρ*aux
 end
-homocedastica(μ, ρ) = homocedastica(length(μ), ρ)
+homocedastica(μ, ρ) = Normal(μ, homocedastica(eltype(μ),length(μ), ρ))
 
 esp(data::Matrix, n) = vec(sum(data,dims=1)./n)
 esp(data::Matrix) = esp(data, size(data)[1])
