@@ -2,7 +2,7 @@ mutable struct Normal{T}
     μ::Vector{T}
     Σ::Matrix{T}
     Normal{T}(μ,Σ) where T =
-        if length(μ) == size(Σ)[1] && length(μ) == size(Σ)[2]
+        if length(μ) == size(Σ)[1] == size(Σ)[2]
             new(μ,Σ)
         else
             DimensionMismatch("dim(μ) = $(length(μ)), dim(Σ) = $(size(Σ))")
