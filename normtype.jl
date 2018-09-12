@@ -15,6 +15,14 @@ mutable struct Normal{T}
         end
 end
 Normal(μ::Vector{T}, Σ::Matrix{T}) where T = Normal{T}(μ,Σ);
+function Base.show(io::IO, x::Normal)
+    summary(io,x)
+    print(io,"\nμ = ",x.μ)
+    print(io, "\n\nΣ = ", x.Σ[1,:])
+    for i in 2:length(x.μ)
+        print(io,"\n    ", x.Σ[i,:])
+    end
+end
 
 afim(v::Vector, x::Normal) = Normal(x.μ+v, x.Σ)
 afim(x::Normal, v::Vector) = afim(v::Vector, x::Normal)
