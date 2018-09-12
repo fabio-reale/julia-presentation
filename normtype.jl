@@ -1,10 +1,15 @@
+using LinearAlgebra
 # Reminder to force Σ to be Symmetric. Then upgrade to positive definite
 mutable struct Normal{T}
     μ::Vector{T}
     Σ::Matrix{T}
     Normal{T}(μ,Σ) where T =
         if length(μ) == size(Σ)[1] == size(Σ)[2]
-            new(μ,Σ)
+            if issymmetric(Σ)
+                new(μ,Σ)
+            else
+                error("Σ não é simétrica")
+            end
         else
             DimensionMismatch("dim(μ) = $(length(μ)), dim(Σ) = $(size(Σ))")
         end
