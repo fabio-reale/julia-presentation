@@ -25,12 +25,11 @@ function Base.show(io::IO, x::Normal)
 end
 
 afim(v::Vector, x::Normal) = Normal(x.μ+v, x.Σ)
-afim(x::Normal, v::Vector) = afim(v::Vector, x::Normal)
 afim(m::Matrix, x::Normal) = Normal(m*x.μ, m*x.Σ*m')
-afim(x::Normal, m::Matrix) = afim(m::Matrix, x::Normal)
 afim(v::Vector, m::Matrix, x::Normal) = afim(m, afim(v,x))
 padrão(x::Normal) = Normal(zero(x.μ), one(x.Σ))
 padrão(::Type{Normal{T}}, p::Integer) where T = Normal( zero(Vector{T}(undef,p)), one(Matrix{T}(undef,p,p)) )
+padrão(T::Type, p::Integer) = padrão(Normal{T},p)
 
 function homocedastica(T::Type, p::Integer, ρ)
     aux = ones(T,p,p)
