@@ -28,8 +28,13 @@ Apresentar funcionalidade básica para importar dados. Em seguida, se aproveitar
 
 ### Aplicação
 
-Mostrar e discutir implementação de um método componentes_principais() utilizando apenas as ferramentas de álgebra linear que fazem parte do pacote básico.
+Mostrar e discutir implementação de um método componentes_principais() utilizando apenas as ferramentas dos pacotes básicos:
+ - `using LinearAlgebra`.
+ - `using Statistics`
+
+`using Distributions`: Em seguida, mostrar como é fácil adaptar esses códigos para aproveitar o pacote [_Distributions.jl_]()
 
 ### Aplicação2
 
-Apresentar o principal pacote estatístico e comparar os resultados da implementação anterior com a função `PCA( )` desse pacote.
+`using MultivariateStats`
+Apresentar o principal pacote para estatística multivariada, [_MultivariateStats.jl_](https://multivariatestatsjl.readthedocs.io/en/latest/) e comparar os resultados dessa implementação com a anterior.

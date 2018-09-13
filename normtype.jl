@@ -1,5 +1,5 @@
 using LinearAlgebra
-# Reminder to force Σ to be Symmetric. Then upgrade to positive definite
+# Reminder to force Σ to be symmetric
 mutable struct Normal{T}
     μ::Vector{T}
     Σ::Matrix{T}
