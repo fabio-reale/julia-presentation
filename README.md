@@ -24,7 +24,7 @@ Apresentar funcionalidade básica para importar dados. Em seguida, se aproveitar
 
 
 - `using DelimitedFiles`
-- `using DataFrames`
+- `using DataFrames` (usar exemplo do [banktest.jl](https://github.com/fabio-reale/cancorr-bank/blob/master/banktest.jl) e lembrar de usar Symbol() pra converter pra DataFrames)
 
 ### Aplicação
 
