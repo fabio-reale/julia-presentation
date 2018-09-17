@@ -1,4 +1,4 @@
-using LinearAlgebra
+using LinearAlgebra, Statistics
 # Reminder to force Σ to be symmetric
 mutable struct Normal{T}
     μ::Vector{T}
@@ -27,6 +27,7 @@ end
 afim(v::Vector, x::Normal) = Normal(x.μ+v, x.Σ)
 afim(m::Matrix, x::Normal) = Normal(m*x.μ, m*x.Σ*m')
 afim(v::Vector, m::Matrix, x::Normal) = afim(m, afim(v,x))
+
 padrão(x::Normal) = Normal(zero(x.μ), one(x.Σ))
 padrão(::Type{Normal{T}}, p::Integer) where T = Normal( zero(Vector{T}(undef,p)), one(Matrix{T}(undef,p,p)) )
 padrão(T::Type, p::Integer) = padrão(Normal{T},p)
@@ -37,19 +38,9 @@ function homocedastica(T::Type, p::Integer, ρ)
 end
 homocedastica(μ, ρ) = Normal(μ, homocedastica(eltype(μ),length(μ), ρ))
 
-esp(data::Matrix, n) = vec(sum(data,dims=1)./n)
-esp(data::Matrix) = esp(data, size(data)[1])
 
-function h_matrix(T, n)
-    J = ones(T,n,n)
-    return one(J)-(J/n)
-end
-h_matrix(data::Matrix{T}) where T = h_matrix(T,size(data)[2])
-
-function sample_normal(data::Matrix{T}) where T
-    n, vars = size(data)
-    μ = esp(data, n)
-    H = h_matrix(T, n)
-    S = (data'*H*data)/(n-1)
+function samplenormal(data::Matrix{T}) where T
+    μ = vec( mean(data, dims=1) )
+    S = cov(data, dims=1)
     return Normal(μ, S)
 end
