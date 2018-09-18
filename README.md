@@ -2,7 +2,7 @@
 
 ### Preliminares
 
-Objetivo: Fazer uma pequena discussão sobre quando a linguagem Julia é mais indicada e quando não é. Como instalar, bem como utilização e funcionalidades básicas. Como referência, recomendo acessar a [página oficial da linguagem](https://julialang.org) pois ela contém muitos recursos úteis e interessantes.
+_Objetivo_: Fazer uma pequena discussão sobre quando a linguagem Julia é mais indicada e quando não é. Como instalar, bem como utilização e funcionalidades básicas. Como referência, recomendo acessar a [página oficial da linguagem](https://julialang.org) pois ela contém muitos recursos úteis e interessantes.
 - **Instalação**: Basta seguir as instruções da [página de downloads ](https://julialang.org/downloads/). As instruções são bem simples, até mesmo para as distribuições mais populares de Linux, uma vez que basta realizar o download dos compilados genéricos.
 
 - **REPL** _(Read Eval Print Loop)_: É a interface padrão para executar código Julia. Funciona como um console interativo. Possui 4 modos de operação, acessíveis por um comando de tecla única: padrão, ajuda (**?**), shell (**;**), gerenciador de pacotes (**]**)
@@ -11,33 +11,20 @@ Objetivo: Fazer uma pequena discussão sobre quando a linguagem Julia é mais in
 
 - **IJulia**: Ambiente que mistura texto e código de maneira agradável. Funciona através do Jupyter notebook. Para quem já utiliza esse ambiente é uma ótima opção porque é razoavelmente simples de instalar nesse caso. Para quem não tem, pode ter alguma dificuldade com a instalação. De qualquer maneira, é recomendável seguir as [instruções de instalação contidas aqui](https://github.com/JuliaLang/IJulia.jl/blob/master/README.md). Alternativamente, é possível utilizar o ambiente IJulia diretamente do browser, sem nem mesmo instalar o Julia, através do [Juliabox](https://juliabox.com), que é um serviço possível de ser utilizado em modo gratuito, mas é recomendável utilizar apenas para aprendizado da linguagem, uma vez que o serviço é lento nessa modalidade.
 
-- **Básico da linguagem**: Preparei um [IJulia notebook]() com o básico da linguagem. Tem uma [versão com todas as células já computadas]().
+### Conteúdo
 
-### Multiple Dispatch
+Se encontra dividido em 3 tópicos (e cadernos) separados:
 
-Apresentar o maior diferencial da linguagem através de um exemplo simples.
+- [**Preliminares**](https://github.com/fabio-reale/julia-presentation/blob/master/Preliminares.ipynb): Lida com o funcionamento básico da linguagem. Inclui operadores aritméticos, tipos numéricos, strings e caracteres, definição de funções, vetores e matrizes (e aritmética matricial), tipo `Array{T, N}` e os diferentes modos de avaliação.
+- [**Multiple Dispatch** e **IO**](https://github.com/fabio-reale/julia-presentation/blob/master/fileIO.ipynb): Apresentação do conceito central da linguagem do ponto de vista do usuário, o Multiple Dispatch. Começando com um exemplo simples, em seguida mostrando um exemplo em processamento de dados e finalizando com uma discussão sobre o pacote [_Distributions.jl_](https://juliastats.github.io/Distributions.jl/latest/starting.html)
+- [**Componentes Principais**](https://github.com/fabio-reale/julia-presentation/blob/master/componentesprincipais.ipynb): Realizar análise de componentes principais no clássico conjunto de dados das flores de íris utilizando apenas os pacotes básicos. Em seguida o processo é repetido utilizando o principal pacote para estatística multivariada, [_MultivariateStats.jl_](https://multivariatestatsjl.readthedocs.io/en/latest/) e os resultados das implementações são comparados.
 
-### Leitura de dados
+Preparei os notebooks para apresentar ao vivo. Antes da apresentação esses arquivos não apresentam células pré-computadas, mas após a apresentação eu subirei outra versão com as células computadas e com comentários adicionais. Se preferirem, eu subo versão em pdf.
 
-Apresentar funcionalidade básica para importar dados. Em seguida, se aproveitar do multiple dispatch para processar dados de natureza distinta de maneira distinta com mínimo esforço.
+### Links e recomendações gerais
 
-- Vetores e Matrizes:
-  - Vector deve sempre ser considerado vetor coluna.
-  - Indexação começa em 1
-  - Na verdade `Vector{T} == Array{T,1}` e `Matrix{T} == Array{T,2}`
+A seção [_Learning_](https://julialang.org/learning/) da página oficial apresenta uma série de tutoriais online em vídeo. Pelo que entendi, todos esses tutoriais tem um IJulia notebook para acompanhar, sendo que esses notebooks estão diretamente acessíveis pelo [Juliabox](https://juliabox.com). Essa seção também apresenta outros tipos de recursos. Nesses casos eu recomendo alguma cautela. Muito mudou das primeiras versões para a versão atual. Basicamente, qualquer coisa anterior à versão 0.5 (outubro de 2016) não vale a pena. Ainda assim, prefira materiais considerando a versão 0.6 (junho de 2017).
 
-- Missing
+A [documentação oficial](https://docs.julialang.org/en/v1/) é bem boa. Prefira utilizá-la pelo modo ajuda (?) para obter a documentação da versão que estiver utilizando. Por vezes, será necessário pesquisar como fazer algo pelo Google e é comum que essas buscas levem à documentação oficial. Nesses casos, é bom verificar a versão que foi acessada. Nos casos em que a busca mostra páginas do Stack Overflow, fórums e afins, a probabilidade do que se diz não ser mais relevante é enorme, recomendo utilizar um filtro por data.
 
-- `using DelimitedFiles`
-- `using DataFrames` (usar exemplo do [banktest.jl](https://github.com/fabio-reale/cancorr-bank/blob/master/banktest.jl) e lembrar de usar Symbol() pra converter pra DataFrames)
-
-### Aplicação
-
-Mostrar e discutir implementação de um método componentes_principais() utilizando apenas as ferramentas dos pacotes básicos:
- - `using LinearAlgebra`.
- - `using Statistics`
-
-### Aplicação2
-
-`using MultivariateStats`
-Apresentar o principal pacote para estatística multivariada, [_MultivariateStats.jl_](https://multivariatestatsjl.readthedocs.io/en/latest/) e comparar os resultados dessa implementação com a anterior.
+O [Fórum de discussão oficial](https://discourse.julialang.org/) tem uma seção dedicada a questões de utilização de principiantes. É bem civilizado e costumam responder rapidamente.
